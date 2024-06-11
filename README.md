@@ -1,81 +1,98 @@
 # X-Integration
 
-X-Integration is a project designed to manage and automate social media content posting on X (formerly Twitter) using NestJS and GitHub Projects. It schedules posts based on the columns in a GitHub Project, posting the content at 5 PM UTC and moving the corresponding card to the "Published" column.
+## Overview
+
+X-Integration is a NestJS-based project designed to manage and automate the posting of content to social media platform X (formerly known as Twitter). It leverages GitHub project boards to schedule and manage posts. The application looks for cards in the "Scheduled" column and posts the content at 5 PM UTC. If a card is in draft mode, the text in the title is used for the post. If the card is an issue, the body of the issue is used for the post. Once posted, the card is moved to the "Published" column.
 
 ## Features
 
-- **Automated Posting**: Automatically posts content to X at 5 PM UTC.
-- **Draft and Issue Handling**: Posts draft titles and issue bodies from GitHub Projects.
-- **Column Management**: Moves cards from the "Scheduled" column to the "Published" column after posting.
-- **Environment Configuration**: Uses environment variables for configuration.
+- **Automated Scheduling**: Automatically post scheduled content to X at 5 PM UTC.
+- **Content Management**: Use card titles for drafts and issue bodies for issues as post content.
+- **GitHub Integration**: Move cards from "Scheduled" to "Published" after posting.
+- **Environment Configuration**: Easily configure using environment variables.
 
-## Prerequisites
+## Requirements
 
 - Node.js
-- GitHub account with a project containing columns "Scheduled" and "Published".
-- X (Twitter) Developer account for API keys and tokens.
+- NestJS
+- GitHub API Access
+- X API Access
 
 ## Installation
 
 1. Clone the repository:
-
     ```bash
-    git clone https://github.com/yourusername/x-integration.git
+    git clone https://github.com/soverant/x-integration.git
     cd x-integration
     ```
 
 2. Install dependencies:
-
     ```bash
-    yarn
+    npm install
     ```
 
-3. Create a `.env` file in the root directory and add your environment variables:
-
+3. Create a `.env` file in the root of the project and add your configuration variables:
     ```env
-    TWITTER_API_KEY=your-twitter-api-key
-    TWITTER_API_SECRET_KEY=your-twitter-api-secret-key
-    TWITTER_ACCESS_TOKEN=your-twitter-access-token
-    TWITTER_ACCESS_TOKEN_SECRET=your-twitter-access-token-secret
-    GITHUB_TOKEN=your-github-token
-    PROJECT_ID=your-github-project-id
+    TWITTER_API_KEY=your_twitter_api_key
+    TWITTER_API_SECRET_KEY=your_twitter_api_secret_key
+    TWITTER_ACCESS_TOKEN=your_twitter_access_token
+    TWITTER_ACCESS_TOKEN_SECRET=your_twitter_access_token_secret
+    GITHUB_TOKEN=your_github_token
+    PROJECT_ID=your_github_project_id
     ```
+
+4. Start the application:
+    ```bash
+    npm run start
+    ```
+
+## Configuration
+
+The application uses the following environment variables for configuration:
+
+- `TWITTER_API_KEY`: Your X API key.
+- `TWITTER_API_SECRET_KEY`: Your X API secret key.
+- `TWITTER_ACCESS_TOKEN`: Your X access token.
+- `TWITTER_ACCESS_TOKEN_SECRET`: Your X access token secret.
+- `GITHUB_TOKEN`: Your GitHub personal access token.
+- `PROJECT_ID`: The ID of your GitHub project.
 
 ## Usage
 
-1. Start the application:
+1. Ensure cards are created in the "Scheduled" column of your GitHub project board. Use the title for drafts or the body for issues to define the content of the X post.
 
-    ```bash
-    yarn start
-    ```
+2. The application will automatically check for scheduled posts and publish them at 5 PM UTC. 
 
-2. The application will automatically look for cards in the "Scheduled" column of the specified GitHub Project and post the content to X at 5 PM UTC.
+3. After posting, the corresponding card will be moved to the "Published" column on your GitHub project board.
 
-3. Once the content is posted, the corresponding card will be moved to the "Published" column.
+## Project Template
 
-## Environment Variables
+To use the provided GitHub project board template, follow these steps:
 
-Ensure the following environment variables are set either in your `.env` file or your deployment environment:
+1. Go to the [project template](https://github.com/orgs/soverant/projects/3).
+2. Click on "Use template" to create a new project board in your repository.
+3. Add your content cards to the "Scheduled" column of the project board.
 
-- `TWITTER_API_KEY`: Your Twitter API Key.
-- `TWITTER_API_SECRET_KEY`: Your Twitter API Secret Key.
-- `TWITTER_ACCESS_TOKEN`: Your Twitter Access Token.
-- `TWITTER_ACCESS_TOKEN_SECRET`: Your Twitter Access Token Secret.
-- `GITHUB_TOKEN`: Your GitHub Personal Access Token.
-- `PROJECT_ID`: The ID of your GitHub Project.
+## Development
 
-## Deployment
-
-To deploy the project, ensure all the environment variables are correctly set in your deployment environment. Use Docker, Heroku, or any other platform as per your preference to host the application.
+To run the application in development mode:
+```bash
+npm run start:dev
+```
 
 ## Contributing
 
 1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/your-feature`).
-3. Commit your changes (`git commit -am 'Add some feature'`).
-4. Push to the branch (`git push origin feature/your-feature`).
-5. Create a new Pull Request.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make your changes.
+4. Commit your changes (`git commit -am 'Add new feature'`).
+5. Push to the branch (`git push origin feature-branch`).
+6. Create a new Pull Request.
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License.
+
+---
+
+Feel free to reach out with any questions or issues regarding the project. Happy coding!
