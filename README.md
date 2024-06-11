@@ -1,73 +1,81 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# X-Integration
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+X-Integration is a project designed to manage and automate social media content posting on X (formerly Twitter) using NestJS and GitHub Projects. It schedules posts based on the columns in a GitHub Project, posting the content at 5 PM UTC and moving the corresponding card to the "Published" column.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Features
 
-## Description
+- **Automated Posting**: Automatically posts content to X at 5 PM UTC.
+- **Draft and Issue Handling**: Posts draft titles and issue bodies from GitHub Projects.
+- **Column Management**: Moves cards from the "Scheduled" column to the "Published" column after posting.
+- **Environment Configuration**: Uses environment variables for configuration.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Prerequisites
+
+- Node.js
+- GitHub account with a project containing columns "Scheduled" and "Published".
+- X (Twitter) Developer account for API keys and tokens.
 
 ## Installation
 
-```bash
-$ yarn install
-```
+1. Clone the repository:
 
-## Running the app
+    ```bash
+    git clone https://github.com/yourusername/x-integration.git
+    cd x-integration
+    ```
 
-```bash
-# development
-$ yarn run start
+2. Install dependencies:
 
-# watch mode
-$ yarn run start:dev
+    ```bash
+    yarn
+    ```
 
-# production mode
-$ yarn run start:prod
-```
+3. Create a `.env` file in the root directory and add your environment variables:
 
-## Test
+    ```env
+    TWITTER_API_KEY=your-twitter-api-key
+    TWITTER_API_SECRET_KEY=your-twitter-api-secret-key
+    TWITTER_ACCESS_TOKEN=your-twitter-access-token
+    TWITTER_ACCESS_TOKEN_SECRET=your-twitter-access-token-secret
+    GITHUB_TOKEN=your-github-token
+    PROJECT_ID=your-github-project-id
+    ```
 
-```bash
-# unit tests
-$ yarn run test
+## Usage
 
-# e2e tests
-$ yarn run test:e2e
+1. Start the application:
 
-# test coverage
-$ yarn run test:cov
-```
+    ```bash
+    yarn start
+    ```
 
-## Support
+2. The application will automatically look for cards in the "Scheduled" column of the specified GitHub Project and post the content to X at 5 PM UTC.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+3. Once the content is posted, the corresponding card will be moved to the "Published" column.
 
-## Stay in touch
+## Environment Variables
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Ensure the following environment variables are set either in your `.env` file or your deployment environment:
+
+- `TWITTER_API_KEY`: Your Twitter API Key.
+- `TWITTER_API_SECRET_KEY`: Your Twitter API Secret Key.
+- `TWITTER_ACCESS_TOKEN`: Your Twitter Access Token.
+- `TWITTER_ACCESS_TOKEN_SECRET`: Your Twitter Access Token Secret.
+- `GITHUB_TOKEN`: Your GitHub Personal Access Token.
+- `PROJECT_ID`: The ID of your GitHub Project.
+
+## Deployment
+
+To deploy the project, ensure all the environment variables are correctly set in your deployment environment. Use Docker, Heroku, or any other platform as per your preference to host the application.
+
+## Contributing
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/your-feature`).
+3. Commit your changes (`git commit -am 'Add some feature'`).
+4. Push to the branch (`git push origin feature/your-feature`).
+5. Create a new Pull Request.
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+This project is licensed under the MIT License. See the LICENSE file for details.
